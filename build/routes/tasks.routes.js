@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var tasks_controller_1 = require("../controllers/tasks.controller");
+var router = (0, express_1.Router)();
+router.get("/tasks", tasks_controller_1.getTask);
+router.get("/tasks/count", function (req, res) { return res.send("Hello World"); });
+router.post("/tasks", function (req, res) { return res.send("Hello World"); });
+router.get("/tasks/:id", function (req, res) { return res.send("Hello World"); });
+router.delete("/tasks/:id", function (req, res) { return res.send("Hello World"); });
+router.put("/tasks/:id", function (req, res) { return res.send("Hello World"); });
+exports.default = router;
