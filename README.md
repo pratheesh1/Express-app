@@ -14,9 +14,9 @@
 - dotenv
 - mongodb
 - morgan
+- winston
 - swagger-jsdoc
 - swagger-ui-express
-- winston
 
 Dev Packages:
 

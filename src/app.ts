@@ -12,6 +12,7 @@ import taskRoutes from "./routes/tasks.routes";
 
 const app = express();
 const specs = swaggerJSDoc(options);
+const logger = require("./config/logger.conf");
 
 app.set("port", process.env.PORT || 3000);
 app.use(cors());
@@ -31,5 +32,12 @@ app.use(taskRoutes);
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs), () =>
   console.log("Error getting API documentation!")
 );
+
+//redirect for 404 if no route has handled the request thus far
+app.use(function (req, res) {
+  res.redirect("https://http.cat/404");
+  var error404 = new Error("Request for unavailable resource.");
+  logger.http(error404);
+});
 
 export default app;

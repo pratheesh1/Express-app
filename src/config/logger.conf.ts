@@ -1,6 +1,14 @@
 const { format, createLogger, transports } = require("winston");
 const { timestamp, combine, errors, json, printf, colorize } = format;
 
+interface logFormat {
+  level?: string;
+  message?: string;
+  timestamp?: Date;
+  stack: any;
+}
+
+// function for handling prod error - format:json
 function buildProdLogger() {
   return createLogger({
     level: "debug",
@@ -16,13 +24,7 @@ function buildProdLogger() {
   });
 }
 
-interface logFormat {
-  level?: string;
-  message?: string;
-  timestamp?: Date;
-  stack: any;
-}
-
+// function for handling prod error - format-custom
 function buildDevLogger() {
   const logFormat = printf(
     ({ level, message, timestamp, stack }: logFormat) => {
