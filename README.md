@@ -16,6 +16,7 @@
 - morgan
 - swagger-jsdoc
 - swagger-ui-express
+- winston
 
 Dev Packages:
 
