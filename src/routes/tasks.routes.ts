@@ -66,6 +66,8 @@ const router = Router();
  *              type: array
  *              items:
  *                $ref: '#/components/schemas/Task'
+ *      500:
+ *        description: Internal server error
  */
 router.get("/tasks", Controllers.getTask);
 
@@ -83,6 +85,8 @@ router.get("/tasks", Controllers.getTask);
  *            schema:
  *              type: integer
  *              example: 15
+ *      500:
+ *        description: Internal server error
  *
  */
 router.get("/tasks/count", Controllers.getTaskCount);
@@ -107,7 +111,7 @@ router.get("/tasks/count", Controllers.getTaskCount);
  *            schema:
  *              $ref: '#/components/schemas/Task'
  *      500:
- *        description: Some server error
+ *        description: Internal server error
  *
  */
 router.post("/tasks", Controllers.postTask);
@@ -133,6 +137,8 @@ router.post("/tasks", Controllers.postTask);
  *          application/json:
  *            schema:
  *              $ref: '#/components/schemas/TaskNotFound'
+ *      500:
+ *        description: Internal server error
  */
 router.get("/tasks/:id", Controllers.getTaskById);
 
@@ -157,6 +163,8 @@ router.get("/tasks/:id", Controllers.getTaskById);
  *          application/json:
  *            schema:
  *              $ref: '#/components/schemas/TaskNotFound'
+ *      500:
+ *        description: Internal server error
  *
  */
 router.delete("/tasks/:id", Controllers.deleteTask);
@@ -188,6 +196,8 @@ router.delete("/tasks/:id", Controllers.deleteTask);
  *          application/json:
  *            schema:
  *              $ref: '#/components/schemas/TaskNotFound'
+ *      500:
+ *        description: Internal server error
  *
  */
 router.put("/tasks/:id", Controllers.putTaskByID);
