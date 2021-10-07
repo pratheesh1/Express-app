@@ -22,3 +22,7 @@ Dev Packages:
 - ts-node
 - typescript
 - all @type dependencies for ts (refer package.json)
+
+## API Documentation:
+
+- Swagger configured for `/docs`
