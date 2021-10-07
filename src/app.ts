@@ -8,17 +8,17 @@ require("dotenv").config();
 import swaggerUI from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
 import { options } from "./config/swagger.options";
-
 import taskRoutes from "./routes/tasks.routes";
 
 const app = express();
 const specs = swaggerJSDoc(options);
 
 app.set("port", process.env.PORT || 3000);
-
 app.use(cors());
 
-// Logs with Morgan
+app.use(express.json());
+
+// Logging
 app.use(morgan("dev"));
 app.use(
   morgan("combined", {
@@ -26,8 +26,7 @@ app.use(
   })
 );
 
-app.use(express.json());
-
+// Routes
 app.use(taskRoutes);
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs), () =>
   console.log("Error getting API documentation!")
