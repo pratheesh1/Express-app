@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
+import fs from "fs";
 require("dotenv").config();
 
 // Swagger for automated API documentation
@@ -16,7 +17,14 @@ const specs = swaggerJSDoc(options);
 app.set("port", process.env.PORT || 3000);
 
 app.use(cors());
+
+// Logs with Morgan
 app.use(morgan("dev"));
+app.use(
+  morgan("combined", {
+    stream: fs.createWriteStream("access.log", { flags: "a" }),
+  })
+);
 
 app.use(express.json());
 
