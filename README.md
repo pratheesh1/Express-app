@@ -2,7 +2,7 @@
 
 ## Scripts config:
 
-| Command             |       |                    |
+| Command             | Tag   |                    |
 | ------------------- | ----- | ------------------ |
 | tsc                 | build |                    |
 | nodemon             | dev   | Refer nodemon.json |
@@ -21,4 +21,4 @@ Dev Packages:
 
 - ts-node
 - typescript
-- all type dependencied (refer package.json)
+- all @type dependencies for ts (refer package.json)

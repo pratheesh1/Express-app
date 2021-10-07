@@ -1,7 +1,7 @@
 const MongoClient = require("mongodb").MongoClient;
 
 // global variable
-let _db: any;
+let _db: string;
 
 async function connect(url: string, dbname: string) {
   let client = await MongoClient.connect(url, {
