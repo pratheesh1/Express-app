@@ -6,11 +6,15 @@ const logErr = require("./logger.conf");
 let _db: string | undefined;
 
 async function connect(url: string | undefined, dbname: string | undefined) {
-  let client = await MongoClient.connect(url, {
-    useUnifiedTopology: true,
-  });
-  _db = client.db(dbname);
-  console.log(`Connected to database ${process.env.DB}`);
+  try {
+    let client = await MongoClient.connect(url, {
+      useUnifiedTopology: true,
+    });
+    _db = client.db(dbname);
+    console.log(`Connected to database ${process.env.DB}`);
+  } catch (e: any) {
+    logErr.error(e);
+  }
 }
 
 async function connectDb() {

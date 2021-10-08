@@ -35,7 +35,7 @@ app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs), () =>
 
 //redirect for 404 if no route has handled the request thus far
 app.use(function (req, res) {
-  res.redirect("https://http.cat/404");
+  res.status(404).send({ error: "Requested resource not found!" });
   var error404 = new Error("Request for unavailable resource.");
   logger.http(error404);
 });

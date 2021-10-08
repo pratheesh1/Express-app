@@ -6,6 +6,8 @@ var collection: string = "";
 //chage collection name here - db to be updated in .env file
 collection = "companies";
 
+//FIXME: res.render for images?
+
 // handler functions for tasks.routes
 const getTask: Handler = async (req, res) => {
   try {
@@ -13,23 +15,19 @@ const getTask: Handler = async (req, res) => {
     let companies = await db.collection(collection).find({}).toArray();
     res.json(companies);
   } catch (e: any) {
-    e.message =
-      e.message + " / Error  occured in getTask func in tasks.controller";
     logger.error(e);
-    res.sendStatus(500).send("Internal server error!");
+    res.status(500).send("Server encountered and internal error!");
   }
 };
 
 const getTaskCount: Handler = async (req, res) => {
   try {
     let db = _db.getDB();
-    let companies = await db.collection(collection).count({});
-    res.send(companies);
+    let companies = await db.collection(collection).countDocuments({});
+    res.send({ numberOfRecords: companies });
   } catch (e: any) {
-    e.message =
-      e.message + " / Error  occured in getTaskCount func in tasks.controller";
     logger.error(e);
-    res.sendStatus(500).send("Internal server error!");
+    res.status(500).send("Server encountered and internal error!");
   }
 };
 
@@ -37,9 +35,8 @@ const postTask: Handler = (req, res) => {
   try {
     res.send("Func postTask");
   } catch (e: any) {
-    e.message = "Error in postTask func in tasks.controller";
     logger.error(e);
-    res.sendStatus(500).send("Internal server error!");
+    res.status(500).send("Server encountered and internal error!");
   }
 };
 
@@ -47,9 +44,8 @@ const getTaskById: Handler = (req, res) => {
   try {
     res.send("Func getTaskById");
   } catch (e: any) {
-    e.message = "Error in getTaskById func in tasks.controller";
     logger.error(e);
-    res.sendStatus(500).send("Internal server error!");
+    res.status(500).send("Server encountered and internal error!");
   }
 };
 
@@ -57,9 +53,8 @@ const deleteTask: Handler = (req, res) => {
   try {
     res.send("Func deleteTask");
   } catch (e: any) {
-    e.message = "Error in deleteTask func in tasks.controller";
     logger.error(e);
-    res.sendStatus(500).send("Internal server error!");
+    res.status(500).send("Server encountered and internal error!");
   }
 };
 
@@ -67,9 +62,8 @@ const putTaskByID: Handler = (req, res) => {
   try {
     res.send("Func putTaskByID");
   } catch (e: any) {
-    e.message = "Error in putTaskByID func in tasks.controller";
     logger.error(e);
-    res.sendStatus(500).send("Internal server error!");
+    res.status(500).send("Server encountered and internal error!");
   }
 };
 
