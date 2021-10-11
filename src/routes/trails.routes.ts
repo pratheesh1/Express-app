@@ -120,13 +120,24 @@ const router = Router();
  *              name: Singapore
  *              description: An island country in SEA
  *          tags:
- * FIXME: I am an arry
- *              description: wheelchair access
- *              detail: wheelchair access only until car park
- *              specialFlags: closed
+ *              - description: wheelchair access
+ *                detail: wheelchair access only until car park
+ *                specialFlags: closed
+ *          review:
+ *              - reviewText: Sunny and warm
+ *                userid: T6164209817a451ca58ebb51e
+ *                username: johnsmith1
+ *                rating: 3
+ *                email: johnsmith@gemail.com
+ *                datetime: 2015-03-25T12:00:00Z
+ *          accessibility: [whellchair, bike, stairs]
  *          difficulty: 3
  *          timeToComplete: 500000
- *    TaskNotFound:
+ *          resourcesInRoute:
+ *              - resourceName: Public toilet
+ *                type: toilet
+ *          datetime: 015-03-25T12:00:00Z
+ *    Trail Not Found:
  *      type: object
  *      properties:
  *        error:
