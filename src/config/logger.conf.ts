@@ -51,7 +51,7 @@ function buildDevLogger() {
   });
 }
 
-let logger =
+var logger =
   process.env.NODE_ENV === "development" ? buildDevLogger() : buildProdLogger();
 
 module.exports = logger;
