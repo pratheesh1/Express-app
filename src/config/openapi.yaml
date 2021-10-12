@@ -127,6 +127,12 @@ components:
           type: string
           description: date-time trail object was created in database
           example: "2015-03-25T12:00:00Z"
+        image:
+          type: array
+          items:
+            type: string
+            description: array of image filenames
+            example: [T6164209817a451ca58ebb51e, T6164209817a451ca58ebb51e]
       required:
         - _id
         - trailName
@@ -135,11 +141,18 @@ components:
         - difficulty
         - timeToComplete
         - datetime
+        - image
+
+tags:
+  - name: Trails
+    description: Trails end point
 
 paths:
   /trails:
     get:
       summary: returns a list of trails
+      tags:
+        - Trails
       responses:
         "200":
           description: OK

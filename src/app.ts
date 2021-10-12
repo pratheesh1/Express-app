@@ -2,50 +2,51 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import fs from "fs";
-require("dotenv").config();
-
-// Swagger for automated API documentation
 import swaggerUI from "swagger-ui-express";
+require("dotenv").config();
+// import routes
 import taskRoutes from "./routes/tasks.routes";
 
+// express
 const app = express();
+// custom error handling
 const logger = require("./config/logger.conf");
-
-// open swagger docs
+// yaml and path for swagger docs
 const yaml = require("js-yaml");
 const path = require("path");
-
+//set port
 app.set("port", process.env.PORT || 3000);
+//cors
 app.use(cors());
-
+// json middlewear for express
 app.use(express.json());
-
-// Logging
+// custom console log
 app.use(morgan("dev"));
+// write all server access request to file access.log
 app.use(
   morgan("combined", {
     stream: fs.createWriteStream("access.log", { flags: "a" }),
   })
 );
 
-// Routes
+// routes
 app.use(taskRoutes);
 
-//route for swagger api documnetation
+// route for swagger api documentation @/api-docs
 try {
   const file = fs.readFileSync(
     path.resolve(__dirname, "./config/openapi.yaml")
   );
   const swaggerJSDocs = yaml.load(file);
-  app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerJSDocs), () =>
+  app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJSDocs), () =>
     console.log("Error getting API documentation!")
   );
 } catch (e) {
   logger.error(e);
 }
 
-//redirect for 404 if no route has handled the request thus far
-app.use(function (req, res) {
+// 404 if no route has handled the request
+app.use((req, res) => {
   res.status(404).send({ error: "Requested resource not found!" });
   var error404 = new Error("Request for unavailable resource.");
   logger.http(error404);
