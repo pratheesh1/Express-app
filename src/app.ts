@@ -6,13 +6,14 @@ require("dotenv").config();
 
 // Swagger for automated API documentation
 import swaggerUI from "swagger-ui-express";
-import swaggerJSDoc from "swagger-jsdoc";
-import { options } from "./config/swagger.options";
 import taskRoutes from "./routes/tasks.routes";
 
 const app = express();
-const specs = swaggerJSDoc(options);
 const logger = require("./config/logger.conf");
+
+// open swagger docs
+const yaml = require("js-yaml");
+const path = require("path");
 
 app.set("port", process.env.PORT || 3000);
 app.use(cors());
@@ -29,9 +30,19 @@ app.use(
 
 // Routes
 app.use(taskRoutes);
-app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs), () =>
-  console.log("Error getting API documentation!")
-);
+
+//route for swagger api documnetation
+try {
+  const file = fs.readFileSync(
+    path.resolve(__dirname, "./config/openapi.yaml")
+  );
+  const swaggerJSDocs = yaml.load(file);
+  app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerJSDocs), () =>
+    console.log("Error getting API documentation!")
+  );
+} catch (e) {
+  logger.error(e);
+}
 
 //redirect for 404 if no route has handled the request thus far
 app.use(function (req, res) {
