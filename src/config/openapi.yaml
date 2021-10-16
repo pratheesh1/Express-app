@@ -381,3 +381,55 @@ paths:
           description: Requested resource not found!
         "500":
           description: Server encountered and internal error!
+  /countries/detailed:
+    get:
+      summary: returns an array of all countries with all available details
+      tags:
+        - Countries
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Country"
+        "404":
+          description: Requested resource not found!
+        "500":
+          description: Server encountered and internal error!
+  /countries/{id}:
+    get:
+      summary: get country by id
+      tags:
+        - Countries
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            required: true
+            description: id of the country
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    country:
+                      type: string
+                      description: name of the country
+                      example: India
+                    country_id:
+                      type: integer
+                      description: application-wide unique id of the country
+                      example: 3865483
+        "404":
+          description: Requested resource not found!
+        "500":
+          description: Server encountered and internal error!
