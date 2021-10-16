@@ -5,7 +5,7 @@ const Trail = require("../models/trail");
 // handler functions for trail routes
 const getTrails: Handler = async (req, res) => {
   try {
-    let trailsArray = await Trail.find();
+    let trailsArray = await Trail.find().exec();
     res.status(200).send(trailsArray);
   } catch (e) {
     res.status(500).send("Server encountered and internal error!");
@@ -16,7 +16,7 @@ const getTrails: Handler = async (req, res) => {
 const postTrail: Handler = async (req, res) => {
   try {
     const newTrail = new Trail(req.body);
-    await newTrail.save();
+    await newTrail.save().exec();
     res.status(201).send("Created");
   } catch (e) {
     res.status(500).send("Server encountered and internal error!");
@@ -26,7 +26,7 @@ const postTrail: Handler = async (req, res) => {
 
 const getTrailCount: Handler = async (req, res) => {
   try {
-    const count = await Trail.count();
+    const count = await Trail.count().exec();
     res.status(200).send({ trailCount: count });
   } catch (e) {
     res.status(500).send("Server encountered and internal error!");
@@ -44,9 +44,26 @@ const getTrailById: Handler = async (req, res) => {
   }
 };
 
-const deleteTrailById: Handler = (req, res) => {};
+const deleteTrailById: Handler = async (req, res) => {
+  try {
+    const trail = await Trail.findByIdAndDelete(req.params.id).exec();
+    res.status(204).send("Deleted");
+  } catch (e) {
+    res.status(500).send("Server encountered and internal error!");
+    logger.error(e);
+  }
+};
 
-const putTrailById: Handler = (req, res) => {};
+const putTrailById: Handler = async (req, res) => {
+  try {
+    const updatedTrail = new Trail(req.body);
+    await Trail.findOneAndUpdate({ _id: req.params.id }, updatedTrail).exec();
+    res.status(200).send("Updated");
+  } catch (e) {
+    res.status(500).send("Server encountered and internal error!");
+    logger.error(e);
+  }
+};
 
 export default {
   getTrails,

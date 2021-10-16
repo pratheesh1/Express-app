@@ -10,4 +10,8 @@ router.get("/trailCount", Controllers.getTrailCount);
 
 router.get("/trails/:id", Controllers.getTrailById);
 
+router.delete("/trails/:id", Controllers.deleteTrailById);
+
+router.put("/trails/:id", Controllers.putTrailById);
+
 export default router;

@@ -157,12 +157,12 @@ components:
 
 tags:
   - name: Trails
-    description: Trails end point
+    description: trails end point
 
 paths:
   /trails:
     get:
-      summary: returns a list of trails
+      summary: returns an array of all trails
       tags:
         - Trails
       responses:
@@ -236,6 +236,45 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Trail"
+        "404":
+          description: Requested resource not found!
+        "500":
+          description: Server encountered and internal error!
+    delete:
+      summary: delete trail by id
+      tags:
+        - Trails
+      parameters:
+        - in: path
+          name: _id
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: Requested resource not found!
+        "500":
+          description: Server encountered and internal error!
+    put:
+      summary: edit an existing trail
+      tags:
+        - Trails
+      parameters:
+        - in: path
+          name: _id
+          schema:
+            type: string
+            required: true
+            description: object id of trail object
+      requestBody:
+        description: a JSON object containing updated trail information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trail"
+      responses:
+        "200":
+          description: Updated
         "404":
           description: Requested resource not found!
         "500":

@@ -20,8 +20,6 @@ app.set("port", process.env.PORT || 3000);
 app.use(cors());
 // json middlewear for express
 app.use(express.json());
-// extended url handling
-app.use(express.urlencoded({ extended: true }));
 // custom console log
 app.use(morgan("dev"));
 // write all server access request to file access.log
