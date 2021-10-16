@@ -155,6 +155,81 @@ components:
         - timeToComplete
         - images
 
+    Country:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: the auto-generated id of the country
+          example: 6164209817a451ca58ebb51e
+        iso:
+          type: string
+          description: ISO code of the country
+          example: IN
+        country:
+          type: string
+          description: name of the country
+          example: India
+        capital:
+          type: string
+          description: capital of the country
+          example: New Delhi
+        currency_code:
+          type: string
+          description: ISO currency code
+          example: INR
+        currency_name:
+          type: string
+          description: name of the currency
+          example: Rupee
+        currency_symbol:
+          type: string
+          description: symbol of the currency
+          example: €
+        phone:
+          type: string
+          description: ISO international dialing code
+          example: "91"
+        postal_code_format:
+          type: string
+          description: postal code format of the country
+          example: "@####@@@"
+        postal_code_regex:
+          type: string
+          description: postal code regex of the country
+          example: "^(?:AZ)*(\\d{4})$"
+        languages:
+          type: array
+          items:
+            type: string
+            description: array of languages spoken in the country
+          example: ["es-AR", "en", "it", "de", "fr"]
+        country_id:
+          type: integer
+          description: application-wide unique id of the country
+          example: 3865483
+        cities:
+          type: array
+          items:
+            type: object
+            properties:
+              city_id:
+                type: integer
+                description: application-wide unique id of the city
+                example: 3427213
+              name:
+                type: string
+                description: name of the city
+                example: "Zárate"
+            required:
+              - city_id
+              - name
+
+      required:
+        - iso
+        - country
+        - country_id
+
 tags:
   - name: Trails
     description: trails end point
