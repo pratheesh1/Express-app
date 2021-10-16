@@ -1,16 +1,48 @@
 import { Handler } from "express";
-import { JsonObject } from "swagger-ui-express";
 const logger = require("../config/logger.conf");
 const Trail = require("../models/trail");
 
 // handler functions for trail routes
-const getTrails: Handler = async (req, res) => {};
+const getTrails: Handler = async (req, res) => {
+  try {
+    let trailsArray = await Trail.find();
+    res.status(200).send(trailsArray);
+  } catch (e) {
+    res.status(500).send("Server encountered and internal error!");
+    logger.error(e);
+  }
+};
 
-const getTrailCount: Handler = async (req, res) => {};
+const postTrail: Handler = async (req, res) => {
+  try {
+    const newTrail = new Trail(req.body);
+    await newTrail.save();
+    res.status(201).send("Created");
+  } catch (e) {
+    res.status(500).send("Server encountered and internal error!");
+    logger.error(e);
+  }
+};
 
-const postTrail: Handler = (req, res) => {};
+const getTrailCount: Handler = async (req, res) => {
+  try {
+    const count = await Trail.count();
+    res.status(200).send({ trailCount: count });
+  } catch (e) {
+    res.status(500).send("Server encountered and internal error!");
+    logger.error(e);
+  }
+};
 
-const getTrailById: Handler = (req, res) => {};
+const getTrailById: Handler = async (req, res) => {
+  try {
+    const trail = await Trail.findById(req.params.id).exec();
+    res.status(200).send(trail);
+  } catch (e) {
+    res.status(500).send("Server encountered and internal error!");
+    logger.error(e);
+  }
+};
 
 const deleteTrailById: Handler = (req, res) => {};
 

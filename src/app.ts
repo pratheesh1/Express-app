@@ -5,7 +5,7 @@ import fs from "fs";
 import swaggerUI from "swagger-ui-express";
 require("dotenv").config();
 // import routes
-import taskRoutes from "./routes/tasks.routes";
+import trailRoutes from "./routes/trails.routes";
 
 // express
 const app = express();
@@ -20,6 +20,8 @@ app.set("port", process.env.PORT || 3000);
 app.use(cors());
 // json middlewear for express
 app.use(express.json());
+// extended url handling
+app.use(express.urlencoded({ extended: true }));
 // custom console log
 app.use(morgan("dev"));
 // write all server access request to file access.log
@@ -30,7 +32,7 @@ app.use(
 );
 
 // routes
-app.use(taskRoutes);
+app.use(trailRoutes);
 
 // route for swagger api documentation @/api-docs
 try {
@@ -47,7 +49,7 @@ try {
 
 // 404 if no route has handled the request
 app.use((req, res) => {
-  res.status(404).send({ error: "Requested resource not found!" });
+  res.status(404).send("Requested resource not found!");
   var error404 = new Error("Request for unavailable resource.");
   logger.http(error404);
 });

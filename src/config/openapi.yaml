@@ -29,6 +29,10 @@ components:
         country:
           type: object
           properties:
+            _id:
+              type: string
+              description: id of country object
+              example: 6164209817a451ca58ebb51e
             name:
               type: string
               description: name of the country the trail is located at
@@ -38,6 +42,7 @@ components:
               description: description for the country
               example: An island country in SEA
           required:
+            - _id
             - name
         tags:
           type: array
@@ -99,7 +104,7 @@ components:
           items:
             type: string
             description: accessibility options for the trail (e.g. no vehicle access)
-            example: [whellchair, bike, stairs]
+          example: [whellchair, bike, stairs]
         difficulty:
           type: integer
           description: difficulty level of the trail (1-easy, 2-medium, 3-hard, 4-challenging)
@@ -123,25 +128,32 @@ components:
                 example: toilet
             required:
               - resourceName
-        datetime:
-          type: string
-          description: date-time trail object was created in database
-          example: "2015-03-25T12:00:00Z"
-        image:
+        images:
           type: array
           items:
             type: string
             description: array of image filenames
-            example: [T6164209817a451ca58ebb51e, T6164209817a451ca58ebb51e]
+          example: [T6164209817a451ca58ebb51, T6164209817a451ca58ebb51e]
+        createdAt:
+          type: datetime
+          description: datetime at which the object was created
+          example: "2021-10-16T07:58:26.862+00:00"
+        updatedAt:
+          type: datetime
+          description: datetime at which the object was last modified
+          example: "2021-10-16T07:58:26.862+00:00"
+        __v:
+          type: integer
+          description: version of the document
+          example: 5
+
       required:
-        - _id
         - trailName
         - description
         - country
         - difficulty
         - timeToComplete
-        - datetime
-        - image
+        - images
 
 tags:
   - name: Trails
@@ -162,7 +174,69 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Trail"
-        "400":
+        "404":
+          description: Requested resource not found!
+        "500":
+          description: Server encountered and internal error!
+    post:
+      summary: add a new trail
+      tags:
+        - Trails
+      requestBody:
+        description: a JSON object containing trail information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trail"
+      responses:
+        "201":
+          description: Created
+        "404":
+          description: Requested resource not found!
+        "500":
+          description: Server encountered and internal error!
+  /trailCount:
+    get:
+      summary: returns number of trail records in database
+      tags:
+        - Trails
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  trailCount:
+                    type: integer
+                    description: number of records in database
+                    example: 526
+        "404":
+          description: Requested resource not found!
+        "500":
+          description: Server encountered and internal error!
+  /trails/{_id}:
+    get:
+      summary: get trail by id
+      tags:
+        - Trails
+      parameters:
+        - in: path
+          name: _id
+          schema:
+            type: string
+            required: true
+            description: object id of trail object
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trail"
+        "404":
           description: Requested resource not found!
         "500":
           description: Server encountered and internal error!
