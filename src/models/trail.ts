@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 
 interface Country {
-  _id: StringConstructor;
+  id: NumberConstructor;
   name: StringConstructor;
   description?: String;
 }
@@ -51,8 +51,8 @@ const trailSchema = new Schema<TrailSchema>(
     },
     country: {
       type: {
-        _id: {
-          type: String,
+        id: {
+          type: Number,
           required: true,
         },
         name: {
