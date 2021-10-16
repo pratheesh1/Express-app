@@ -16,7 +16,7 @@ const getTrails: Handler = async (req, res) => {
 const postTrail: Handler = async (req, res) => {
   try {
     const newTrail = new Trail(req.body);
-    await newTrail.save().exec();
+    await newTrail.save();
     res.status(201).send("Created");
   } catch (e) {
     res.status(500).send("Server encountered and internal error!");

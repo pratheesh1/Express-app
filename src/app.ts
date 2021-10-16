@@ -6,6 +6,7 @@ import swaggerUI from "swagger-ui-express";
 require("dotenv").config();
 // import routes
 import trailRoutes from "./routes/trails.routes";
+import countryRoutes from "./routes/countries.routes";
 
 // express
 const app = express();
@@ -31,6 +32,7 @@ app.use(
 
 // routes
 app.use(trailRoutes);
+app.use(countryRoutes);
 
 // route for swagger api documentation @/api-docs
 try {

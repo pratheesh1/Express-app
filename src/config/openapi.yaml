@@ -146,7 +146,6 @@ components:
           type: integer
           description: version of the document
           example: 5
-
       required:
         - trailName
         - description
@@ -224,7 +223,6 @@ components:
             required:
               - city_id
               - name
-
       required:
         - iso
         - country
@@ -233,6 +231,8 @@ components:
 tags:
   - name: Trails
     description: trails end point
+  - name: Countries
+    description: countries end point
 
 paths:
   /trails:
@@ -350,6 +350,33 @@ paths:
       responses:
         "200":
           description: Updated
+        "404":
+          description: Requested resource not found!
+        "500":
+          description: Server encountered and internal error!
+  /countries:
+    get:
+      summary: returns an array of all countries
+      tags:
+        - Countries
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    country:
+                      type: string
+                      description: name of the country
+                      example: India
+                    country_id:
+                      type: integer
+                      description: application-wide unique id of the country
+                      example: 3865483
         "404":
           description: Requested resource not found!
         "500":
