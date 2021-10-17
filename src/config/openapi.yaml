@@ -153,10 +153,10 @@ components:
               type: string
               description: about you description of the user who created the trail
               example: I am very into hiking ab=nd trail running
-            required:
-              - firstName
-              - lastName
-              - email
+          required:
+            - firstName
+            - lastName
+            - email
         createdAt:
           type: datetime
           description: datetime at which the object was created
