@@ -28,8 +28,8 @@ interface resourcesInRoute {
 
 interface createdBy {
   firstName: StringConstructor;
-  lastName: String;
-  email: String;
+  lastName: StringConstructor;
+  email: StringConstructor;
   aboutYou?: String;
 }
 
@@ -161,19 +161,20 @@ const trailSchema = new Schema<TrailSchema>(
           type: String,
           required: true,
         },
+        lastName: {
+          type: String,
+          required: true,
+        },
+        email: {
+          type: String,
+          required: true,
+        },
+        aboutYou: {
+          type: String,
+          required: false,
+        },
       },
-      lastName: {
-        type: String,
-        required: true,
-      },
-      email: {
-        type: String,
-        required: true,
-      },
-      aboutYou: {
-        type: String,
-        required: false,
-      },
+      required: true,
     },
   },
   { timestamps: true }
