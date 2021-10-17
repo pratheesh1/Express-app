@@ -26,6 +26,13 @@ interface resourcesInRoute {
   type?: String;
 }
 
+interface createdBy {
+  firstName: StringConstructor;
+  lastName: String;
+  email: String;
+  aboutYou?: String;
+}
+
 interface TrailSchema {
   trailName: StringConstructor;
   description: StringConstructor;
@@ -37,6 +44,7 @@ interface TrailSchema {
   timeToComplete: NumberConstructor;
   resourcesInRoute?: resourcesInRoute[];
   images: String[];
+  createdBy: createdBy;
 }
 
 const trailSchema = new Schema<TrailSchema>(
@@ -146,6 +154,26 @@ const trailSchema = new Schema<TrailSchema>(
     images: {
       type: [String],
       required: true,
+    },
+    createdBy: {
+      type: {
+        firstName: {
+          type: String,
+          required: true,
+        },
+      },
+      lastName: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+      },
+      aboutYou: {
+        type: String,
+        required: false,
+      },
     },
   },
   { timestamps: true }

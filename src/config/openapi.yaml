@@ -134,6 +134,29 @@ components:
             type: string
             description: array of image filenames
           example: [T6164209817a451ca58ebb51, T6164209817a451ca58ebb51e]
+        createdBy:
+          type: object
+            properties:
+              firstName:
+                type: string
+                description: first name of the user who created the trail
+                example: John
+              lastName:
+                type: string
+                description: last name of the user who created the trail
+                example: Smith
+              email:
+                type: string
+                description: email of the user who created the trail
+                example: johnsmith@gemail.com
+              aboutYou:
+                type: string
+                description: about you description of the user who created the trail
+                example: I am very into hiking ab=nd trail running
+              required:
+                - firstName
+                - lastName
+                - email
         createdAt:
           type: datetime
           description: datetime at which the object was created
@@ -153,6 +176,7 @@ components:
         - difficulty
         - timeToComplete
         - images
+        - createdBy
 
     Country:
       type: object
