@@ -10,7 +10,7 @@ const getCountries: Handler = async (req, res) => {
       .exec();
     res.status(200).send(countries);
   } catch (e) {
-    res.status(500).send("Server encountered and internal error!");
+    res.status(500).send("Server encountered an internal error!");
     logger.error(e);
   }
 };
@@ -20,7 +20,7 @@ const getDetailedCountry: Handler = async (req, res) => {
     let countries = await Country.find().exec();
     res.status(200).send(countries);
   } catch (e) {
-    res.status(500).send("Server encountered and internal error!");
+    res.status(500).send("Server encountered an internal error!");
     logger.error(e);
   }
 };
@@ -32,7 +32,7 @@ const getCountryById: Handler = async (req, res) => {
       .exec();
     res.status(200).send(country);
   } catch (e) {
-    res.status(500).send("Server encountered and internal error!");
+    res.status(500).send("Server encountered an internal error!");
     logger.error(e);
   }
 };

@@ -8,7 +8,7 @@ const getTrails: Handler = async (req, res) => {
     let trailsArray = await Trail.find().exec();
     res.status(200).send(trailsArray);
   } catch (e) {
-    res.status(500).send("Server encountered and internal error!");
+    res.status(500).send("Server encountered an internal error!");
     logger.error(e);
   }
 };
@@ -19,7 +19,7 @@ const postTrail: Handler = async (req, res) => {
     await newTrail.save();
     res.status(201).send("Created");
   } catch (e) {
-    res.status(500).send("Server encountered and internal error!");
+    res.status(500).send("Server encountered an internal error!");
     logger.error(e);
   }
 };
@@ -29,7 +29,7 @@ const getTrailCount: Handler = async (req, res) => {
     const count = await Trail.count().exec();
     res.status(200).send({ trailCount: count });
   } catch (e) {
-    res.status(500).send("Server encountered and internal error!");
+    res.status(500).send("Server encountered an internal error!");
     logger.error(e);
   }
 };
@@ -39,7 +39,7 @@ const getTrailById: Handler = async (req, res) => {
     const trail = await Trail.findById(req.params.id).exec();
     res.status(200).send(trail);
   } catch (e) {
-    res.status(500).send("Server encountered and internal error!");
+    res.status(500).send("Server encountered an internal error!");
     logger.error(e);
   }
 };
@@ -49,7 +49,7 @@ const deleteTrailById: Handler = async (req, res) => {
     const trail = await Trail.findByIdAndDelete(req.params.id).exec();
     res.status(204).send("Deleted");
   } catch (e) {
-    res.status(500).send("Server encountered and internal error!");
+    res.status(500).send("Server encountered an internal error!");
     logger.error(e);
   }
 };
@@ -60,7 +60,7 @@ const putTrailById: Handler = async (req, res) => {
     await Trail.findOneAndUpdate({ _id: req.params.id }, updatedTrail).exec();
     res.status(200).send("Updated");
   } catch (e) {
-    res.status(500).send("Server encountered and internal error!");
+    res.status(500).send("Server encountered an internal error!");
     logger.error(e);
   }
 };
