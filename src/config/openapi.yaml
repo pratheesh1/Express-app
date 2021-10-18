@@ -109,6 +109,10 @@ components:
           type: integer
           description: difficulty level of the trail (1-easy, 2-medium, 3-hard, 4-challenging)
           example: 3
+        distance:
+          type: float
+          description: distance in km
+          example: 5.2
         timeToComplete:
           type: integer
           description: average time to complete the trail in milliseconds
@@ -174,6 +178,7 @@ components:
         - description
         - country
         - difficulty
+        - distance
         - timeToComplete
         - images
         - createdBy

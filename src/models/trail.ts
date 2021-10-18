@@ -41,6 +41,7 @@ interface TrailSchema {
   review?: review[];
   accessibility?: String[];
   difficulty: NumberConstructor;
+  distance: NumberConstructor;
   timeToComplete: NumberConstructor;
   resourcesInRoute?: resourcesInRoute[];
   images: String[];
@@ -129,6 +130,10 @@ const trailSchema = new Schema<TrailSchema>(
       required: false,
     },
     difficulty: {
+      type: Number,
+      required: true,
+    },
+    distance: {
       type: Number,
       required: true,
     },
