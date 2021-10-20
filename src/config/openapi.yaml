@@ -378,15 +378,24 @@ paths:
             required: true
             description: object id of trail object
       requestBody:
-        description: a JSON object containing updated trail information
+        description: a JSON object containing fileds to be updated
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Trail"
+              type: object
+              properties:
+                trailName:
+                  type: string
+                  description: the name of the trail
+                  example: Southern Ridges and Labrador Park Loop
       responses:
         "200":
-          description: Updated
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trail"
         "404":
           description: Requested resource not found!
         "500":

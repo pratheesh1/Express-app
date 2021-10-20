@@ -56,9 +56,15 @@ const deleteTrailById: Handler = async (req, res) => {
 
 const putTrailById: Handler = async (req, res) => {
   try {
-    const updatedTrail = new Trail(req.body);
-    await Trail.findOneAndUpdate({ _id: req.params.id }, updatedTrail).exec();
-    res.status(200).send("Updated");
+    const update = req.body;
+    const updatedTrail = await Trail.findOneAndUpdate(
+      { _id: req.params.id },
+      update,
+      {
+        new: true,
+      }
+    ).exec();
+    res.status(200).send(updatedTrail);
   } catch (e) {
     res.status(500).send("Server encountered an internal error!");
     logger.error(e);
