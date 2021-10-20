@@ -44,6 +44,7 @@ interface TrailSchema {
   distance: NumberConstructor;
   timeToComplete: NumberConstructor;
   resourcesInRoute?: resourcesInRoute[];
+  describeTrail?: String;
   images: String[];
   createdBy: createdBy;
 }
@@ -154,6 +155,10 @@ const trailSchema = new Schema<TrailSchema>(
           },
         },
       ],
+      required: false,
+    },
+    describeTrail: {
+      type: String,
       required: false,
     },
     images: {

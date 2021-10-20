@@ -132,6 +132,14 @@ components:
                 example: toilet
             required:
               - resourceName
+        describeTrail:
+          type: string
+          description: detailed article on the trail
+          example:
+            Spanning over 56 hectares of land is Singapore’s largest freshwater marshland. The Kranji Marshes is home to a vast range of green habitats and a myriad of bird and butterfly species, making it a great hiking destination for wildlife enthusiasts and nature lovers. For a birds-eye view of the marsh, make your way up to the Raptor Tower and bask in the insane view from 10 metres up. While visitors are free to explore the area on their own by foot, NParks organises monthly guided walks that give visitors a closer look at the conservation area that’s close to the public.
+            Spanning over 56 hectares of land is Singapore’s largest freshwater marshland. The Kranji Marshes is home to a vast range of green habitats and a myriad of bird and butterfly species, making it a great hiking destination for wildlife enthusiasts and nature lovers. For a birds-eye view of the marsh, make your way up to the Raptor Tower and bask in the insane view from 10 metres up. While visitors are free to explore the area on their own by foot, NParks organises monthly guided walks that give visitors a closer look at the conservation area that’s close to the public.
+            Spanning over 56 hectares of land is Singapore’s largest freshwater marshland. The Kranji Marshes is home to a vast range of green habitats and a myriad of bird and butterfly species, making it a great hiking destination for wildlife enthusiasts and nature lovers.
+            For a birds-eye view of the marsh, make your way up to the Raptor Tower and bask in the insane view from 10 metres up. While visitors are free to explore the area on their own by foot, NParks organises monthly guided walks that give visitors a closer look at the conservation area that’s close to the public.
         images:
           type: array
           items:
