@@ -5,7 +5,52 @@ const Trail = require("../models/trail");
 // handler functions for trail routes
 const getTrails: Handler = async (req, res) => {
   try {
-    let trailsArray = await Trail.find().exec();
+    const request = req.query;
+    const distance = request.distance;
+
+    //search by  query
+    const q = request.q;
+    let query = [];
+    //add to the query if there are search terms
+    if (q) {
+      // generate regex for search
+      const terms: Array<string> = q.toString().split(" ");
+      const reducer = (previousValue: string, currentValue: string) =>
+        previousValue + ".*" + currentValue;
+      const search = terms.reduce(reducer);
+      const regex = new RegExp("^.*" + search + ".*", "i");
+      //query in trailName, description, describeTrail and country.name
+      query.push({ trailName: regex });
+      query.push({ description: regex });
+      query.push({ describeTrail: regex });
+      query.push({ "country.name": regex });
+    } else {
+      query.push({});
+    }
+
+    //dearch difficulty level
+    const difficulty =
+      typeof request.difficulty === "string"
+        ? [request.difficulty]
+        : request.difficulty;
+    let difficultyFilter;
+    if (request.difficulty) {
+      difficultyFilter = { difficulty: { $in: difficulty } };
+    } else {
+      difficultyFilter = {};
+    }
+
+    //search by length
+
+    //find and return all trails
+    let trailsArray = await Trail.find()
+      .and([
+        {
+          $or: query,
+        },
+        difficultyFilter,
+      ])
+      .exec();
     res.status(200).send(trailsArray);
   } catch (e) {
     res.status(500).send("Server encountered an internal error!");

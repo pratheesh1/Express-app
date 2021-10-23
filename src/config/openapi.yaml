@@ -274,9 +274,31 @@ tags:
 paths:
   /trails:
     get:
-      summary: returns an array of all trails
+      summary: returns an array of trails
+      description: >
+        The `q` query searches in fields:
+        trailName, description, country.name and describeTrail (refer schema)
       tags:
         - Trails
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+          required: false
+          description: search query
+        - name: difficulty
+          in: query
+          schema:
+            type: array
+            items:
+              type: integer
+              minimum: 1
+              maximum: 4
+          required: false
+          style: form
+          explode: true
+          description: difficulty level from 1 to 4
       responses:
         "200":
           description: OK
@@ -308,7 +330,7 @@ paths:
           description: Requested resource not found!
         "500":
           description: Server encountered and internal error!
-  /trailCount:
+  /trails/count:
     get:
       summary: returns number of trail records in database
       tags:
@@ -340,7 +362,7 @@ paths:
           schema:
             type: string
             required: true
-            description: object id of trail object
+          description: object id of trail
       responses:
         "200":
           description: OK
@@ -359,6 +381,7 @@ paths:
       parameters:
         - in: path
           name: _id
+          description: object id of trail
       responses:
         "204":
           description: Deleted
@@ -376,7 +399,7 @@ paths:
           schema:
             type: string
             required: true
-            description: object id of trail object
+          description: object id of trail
       requestBody:
         description: a JSON object containing fileds to be updated
         required: true
@@ -456,7 +479,7 @@ paths:
           schema:
             type: integer
             required: true
-            description: id of the country
+          description: id of the country
       responses:
         "200":
           description: OK
