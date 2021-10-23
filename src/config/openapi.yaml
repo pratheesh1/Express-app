@@ -287,6 +287,7 @@ paths:
             type: string
           required: false
           description: search query
+          example: Hiking Trail
         - name: difficulty
           in: query
           schema:
@@ -295,9 +296,11 @@ paths:
               type: integer
               minimum: 1
               maximum: 4
+              example: 1
           required: false
           style: form
           explode: true
+          example: 1
           description: difficulty level from 1 to 4
         - name: distance
           in: query
@@ -306,9 +309,11 @@ paths:
             items:
               type: string
               pattern: "^[0-9]*,[0-9]*"
+              example: 2,8
           required: false
           style: form
           explode: true
+          example: 2,8
           description: >
             distance filter from-to search (e.g. 2,3 , 4,5)
             searches for trails with distance in range 2-3km and 4-5km
@@ -376,6 +381,7 @@ paths:
             type: string
             required: true
           description: object id of trail
+          example: 616c286b39fa9419c9bed001
       responses:
         "200":
           description: OK
@@ -395,6 +401,7 @@ paths:
         - in: path
           name: _id
           description: object id of trail
+          example: 616c286b39fa9419c9bed589
       responses:
         "204":
           description: Deleted
