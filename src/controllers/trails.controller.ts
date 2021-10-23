@@ -6,7 +6,6 @@ const Trail = require("../models/trail");
 const getTrails: Handler = async (req, res) => {
   try {
     const request = req.query;
-    const distance = request.distance;
 
     //search by  query
     const q = request.q;
@@ -28,7 +27,7 @@ const getTrails: Handler = async (req, res) => {
       query.push({});
     }
 
-    //dearch difficulty level
+    //search difficulty level
     const difficulty =
       typeof request.difficulty === "string"
         ? [request.difficulty]
@@ -41,16 +40,33 @@ const getTrails: Handler = async (req, res) => {
     }
 
     //search by length
+    const distance =
+      typeof request.distance === "string"
+        ? [request.distance]
+        : request.distance;
+    let distanceFilter = [];
+    if (request.distance) {
+      // @ts-ignore: undefined code error - if already making sure there is a value to start with
+      distance.forEach((e) => {
+        const query = e.split(",");
+        distanceFilter.push({ distance: { $gte: query[0], $lte: query[1] } });
+      });
+    } else {
+      distanceFilter.push({});
+    }
 
-    //find and return all trails
-    let trailsArray = await Trail.find()
-      .and([
+    //find and return all trails based on query
+    let trailsArray = await Trail.find({
+      $and: [
         {
           $or: query,
         },
         difficultyFilter,
-      ])
-      .exec();
+        {
+          $or: distanceFilter,
+        },
+      ],
+    }).exec();
     res.status(200).send(trailsArray);
   } catch (e) {
     res.status(500).send("Server encountered an internal error!");
