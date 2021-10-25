@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Project - 2 API
-  description: API for Trend Global DWAD TGC-14 Project 2 (@Pratheesh Soman)
+  description: API for Trent Global DWAD TGC-14 Project 2 (@Pratheesh Soman)
   version: "0.1"
   contact:
     email: pratheesh1269@gmail.com
