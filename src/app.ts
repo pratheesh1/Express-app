@@ -12,9 +12,6 @@ import countryRoutes from "./routes/countries.routes";
 const app = express();
 // custom error handling
 const logger = require("./config/logger.conf");
-// yaml and path for swagger docs
-const yaml = require("js-yaml");
-const path = require("path");
 //set port
 app.set("port", process.env.PORT || 3000);
 //cors
@@ -36,10 +33,7 @@ app.use(countryRoutes);
 
 // route for swagger api documentation @/api-docs
 try {
-  const file = fs.readFileSync(
-    path.resolve(__dirname, "./config/openapi.yaml")
-  );
-  const swaggerJSDocs = yaml.load(file);
+  const swaggerJSDocs = require("./config/swagger.conf.json");
   app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJSDocs), () =>
     console.log("Error getting API documentation!")
   );
