@@ -8,7 +8,7 @@ info:
 servers:
   - url: https://ps-project02-express.herokuapp.com/
     description: Production Server
-host: https://ps-project02-express.herokuapp.com/,
+host: https://ps-project02-express.herokuapp.com/
 
 components:
   schemas:
