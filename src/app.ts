@@ -16,8 +16,6 @@ const logger = require("./config/logger.conf");
 app.set("port", process.env.PORT || 3000);
 //cors
 app.use(cors());
-// json middlewear for express
-app.use(express.json());
 // custom console log
 app.use(morgan("dev"));
 // write all server access request to file access.log
