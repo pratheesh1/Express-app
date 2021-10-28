@@ -7,7 +7,8 @@ info:
     email: pratheesh1269@gmail.com
 servers:
   - url: https://ps-project02-express.herokuapp.com/
-    description: Development Server
+    description: Production Server
+host: https://ps-project02-express.herokuapp.com/,
 
 components:
   schemas:
