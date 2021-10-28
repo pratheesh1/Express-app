@@ -6,7 +6,7 @@ info:
   contact:
     email: pratheesh1269@gmail.com
 servers:
-  - url: http://localhost:3500/
+  - url: https://ps-project02-express.herokuapp.com/
     description: Development Server
 
 components:

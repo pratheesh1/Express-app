@@ -16,7 +16,7 @@ const logger = require("./config/logger.conf");
 const yaml = require("js-yaml");
 const path = require("path");
 //set port
-app.set("port", process.env.PORT);
+app.set("port", process.env.PORT || 3000);
 //cors
 app.use(cors());
 // json middlewear for express
