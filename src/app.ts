@@ -32,14 +32,8 @@ app.use(trailRoutes);
 app.use(countryRoutes);
 
 // route for swagger api documentation @/api-docs
-try {
-  const swaggerJSDocs = require("./config/swagger.conf.json");
-  app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJSDocs), () =>
-    console.log("Error getting API documentation!")
-  );
-} catch (e) {
-  logger.error(e);
-}
+const swaggerJSDocs = require("./config/swagger.conf.json");
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJSDocs));
 
 // 404 if no route has handled the request
 app.use((req, res) => {
