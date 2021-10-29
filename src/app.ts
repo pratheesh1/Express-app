@@ -8,14 +8,16 @@ require("dotenv").config();
 import trailRoutes from "./routes/trails.routes";
 import countryRoutes from "./routes/countries.routes";
 
-// express
+// express app
 const app = express();
-// custom error handling
+// custom error handling middleware
 const logger = require("./config/logger.conf");
-//set port
+//set port to env.PORT or 3000
 app.set("port", process.env.PORT || 3000);
-//cors
+//cors middleware to allow cross origin resource sharing
 app.use(cors());
+//express json for parsing application/json
+app.use(express.json());
 // custom console log
 app.use(morgan("dev"));
 // write all server access request to file access.log
@@ -25,7 +27,7 @@ app.use(
   })
 );
 
-// routes
+// routes for the app
 app.use(trailRoutes);
 app.use(countryRoutes);
 

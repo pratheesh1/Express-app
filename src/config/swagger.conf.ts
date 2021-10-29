@@ -17,7 +17,7 @@ const swaggerDoc = {
   },
   servers: [
     {
-      url: "https://ps-project02-express.herokuapp.com/",
+      url: "http://localhost:3500",
       description: "Production Server",
     },
   ],
@@ -802,8 +802,8 @@ const swaggerDoc = {
                   type: "object",
                   properties: {
                     message: {
-                      type: "string",
-                      example: "_id must be a string",
+                      type: "integer",
+                      example: "id must be an integer",
                     },
                   },
                 },

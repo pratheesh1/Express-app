@@ -2,9 +2,13 @@ import { Router } from "express";
 import Controllers from "../controllers/trails.controller";
 const router = Router();
 
-router.get("/trails", Controllers.getTrails);
+// import yup middleware for validation
+import validate from "../middleware/validateRequest";
+import { getTrailsSchema, postTrailSchema } from "../schema/trails.schema";
 
-router.post("/trails", Controllers.postTrail);
+router.get("/trails", validate(getTrailsSchema), Controllers.getTrails);
+
+router.post("/trails", validate(postTrailSchema), Controllers.postTrail);
 
 router.get("/trails/count", Controllers.getTrailCount);
 
