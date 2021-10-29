@@ -4,9 +4,15 @@ const swaggerDoc = {
     title: "Project - 2 API",
     description:
       "API for Trent Global DWAD TGC-14 Project 2 (@Pratheesh Soman)",
-    version: "0.1",
+    version: "1.0",
     contact: {
+      name: "Pratheesh Soman",
+      url: "https://github.com/pratheesh1/",
       email: "pratheesh1269@gmail.com",
+    },
+    license: {
+      name: "Apache 2.0",
+      url: "https://www.apache.org/licenses/LICENSE-2.0.html",
     },
   },
   servers: [
@@ -15,7 +21,6 @@ const swaggerDoc = {
       description: "Production Server",
     },
   ],
-  host: "https://ps-project02-express.herokuapp.com/",
   components: {
     schemas: {
       Trail: {
@@ -147,7 +152,7 @@ const swaggerDoc = {
             example: 3,
           },
           distance: {
-            type: "float",
+            type: "number",
             description: "distance in km",
             example: 5.2,
           },
@@ -186,9 +191,12 @@ const swaggerDoc = {
             type: "array",
             items: {
               type: "string",
-              description: "array of image filenames",
+              description: "array of image url",
             },
-            example: ["T6164209817a451ca58ebb51", "T6164209817a451ca58ebb51e"],
+            example: [
+              "https://images.unsplash.com/photo-1635449586099-3ecb7ef8374d",
+              "https://images.unsplash.com/photo-1546839959-e26ee101cd9b",
+            ],
           },
           createdBy: {
             type: "object",
@@ -218,12 +226,14 @@ const swaggerDoc = {
             required: ["firstName", "lastName", "email"],
           },
           createdAt: {
-            type: "datetime",
+            type: "string",
+            format: "date-time",
             description: "datetime at which the object was created",
             example: "2021-10-16T07:58:26.862+00:00",
           },
           updatedAt: {
-            type: "datetime",
+            type: "string",
+            format: "date-time",
             description: "datetime at which the object was last modified",
             example: "2021-10-16T07:58:26.862+00:00",
           },
@@ -413,6 +423,23 @@ const swaggerDoc = {
               },
             },
           },
+          "400": {
+            description: "Bad Request!",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    message: {
+                      type: "string",
+                      example:
+                        "difficulty must be a number in range >=1 and <=4",
+                    },
+                  },
+                },
+              },
+            },
+          },
           "404": {
             description: "Requested resource not found!",
           },
@@ -438,6 +465,23 @@ const swaggerDoc = {
         responses: {
           "201": {
             description: "Created",
+          },
+          "400": {
+            description: "Bad Request!",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    message: {
+                      type: "string",
+                      example:
+                        "form data not valid/required fields missing, refer schema",
+                    },
+                  },
+                },
+              },
+            },
           },
           "404": {
             description: "Requested resource not found!",
@@ -489,8 +533,8 @@ const swaggerDoc = {
             name: "_id",
             schema: {
               type: "string",
-              required: true,
             },
+            required: true,
             description: "object id of trail",
             example: "616c286b39fa9419c9bed001",
           },
@@ -502,6 +546,22 @@ const swaggerDoc = {
               "application/json": {
                 schema: {
                   $ref: "#/components/schemas/Trail",
+                },
+              },
+            },
+          },
+          "400": {
+            description: "Bad Request!",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    message: {
+                      type: "string",
+                      example: "_id must be a string",
+                    },
+                  },
                 },
               },
             },
@@ -521,6 +581,10 @@ const swaggerDoc = {
           {
             in: "path",
             name: "_id",
+            schema: {
+              type: "string",
+            },
+            required: true,
             description: "object id of trail",
             example: "616c286b39fa9419c9bed589",
           },
@@ -528,6 +592,22 @@ const swaggerDoc = {
         responses: {
           "204": {
             description: "Deleted",
+          },
+          "400": {
+            description: "Bad Request!",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    message: {
+                      type: "string",
+                      example: "_id must be a string",
+                    },
+                  },
+                },
+              },
+            },
           },
           "404": {
             description: "Requested resource not found!",
@@ -546,8 +626,8 @@ const swaggerDoc = {
             name: "_id",
             schema: {
               type: "string",
-              required: true,
             },
+            required: true,
             description: "object id of trail",
           },
         ],
@@ -576,6 +656,22 @@ const swaggerDoc = {
               "application/json": {
                 schema: {
                   $ref: "#/components/schemas/Trail",
+                },
+              },
+            },
+          },
+          "400": {
+            description: "Bad Request!",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    message: {
+                      type: "string",
+                      example: "form data not valid, refer schema",
+                    },
+                  },
                 },
               },
             },
@@ -666,8 +762,8 @@ const swaggerDoc = {
             name: "id",
             schema: {
               type: "integer",
-              required: true,
             },
+            required: true,
             description: "id of the country",
           },
         ],
@@ -692,6 +788,22 @@ const swaggerDoc = {
                           "application-wide unique id of the country",
                         example: 3865483,
                       },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          "400": {
+            description: "Bad Request!",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    message: {
+                      type: "string",
+                      example: "_id must be a string",
                     },
                   },
                 },
