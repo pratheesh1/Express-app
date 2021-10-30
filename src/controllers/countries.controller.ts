@@ -7,6 +7,7 @@ const getCountries: Handler = async (req, res) => {
   try {
     let countries = await Country.find()
       .select("country country_id -_id")
+      .sort({ country: 1 })
       .exec();
     res.status(200).send(countries);
   } catch (e) {
