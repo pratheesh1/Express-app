@@ -4,7 +4,13 @@ const router = Router();
 
 // import yup middleware for validation
 import validate from "../middleware/validateRequest";
-import { getTrailsSchema, postTrailSchema } from "../schema/trails.schema";
+import {
+  getTrailsSchema,
+  postTrailSchema,
+  getTrailByIdSchema,
+  deleteTrailByIdSchema,
+  putTrailByIdSchema,
+} from "../schema/trails.schema";
 
 router.get("/trails", validate(getTrailsSchema), Controllers.getTrails);
 
@@ -12,10 +18,22 @@ router.post("/trails", validate(postTrailSchema), Controllers.postTrail);
 
 router.get("/trails/count", Controllers.getTrailCount);
 
-router.get("/trails/:id", Controllers.getTrailById);
+router.get(
+  "/trails/:id",
+  validate(getTrailByIdSchema),
+  Controllers.getTrailById
+);
 
-router.delete("/trails/:id", Controllers.deleteTrailById);
+router.delete(
+  "/trails/:id",
+  validate(deleteTrailByIdSchema),
+  Controllers.deleteTrailById
+);
 
-router.put("/trails/:id", Controllers.putTrailById);
+router.put(
+  "/trails/:id",
+  validate(putTrailByIdSchema),
+  Controllers.putTrailById
+);
 
 export default router;

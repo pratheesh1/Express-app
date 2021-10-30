@@ -99,9 +99,14 @@ const getTrailById: Handler = async (req, res) => {
   try {
     const trail = await Trail.findById(req.params.id).exec();
     res.status(200).send(trail);
-  } catch (e) {
-    res.status(500).send("Server encountered an internal error!");
-    logger.error(e);
+  } catch (e: any) {
+    if (e.message.includes("ObjectId")) {
+      res.status(400).send({ message: "invalid document _id" });
+      logger.error(e);
+    } else {
+      res.status(500).send("Server encountered an internal error!");
+      logger.error(e);
+    }
   }
 };
 
@@ -109,9 +114,14 @@ const deleteTrailById: Handler = async (req, res) => {
   try {
     const trail = await Trail.findByIdAndDelete(req.params.id).exec();
     res.status(204).send("Deleted");
-  } catch (e) {
-    res.status(500).send("Server encountered an internal error!");
-    logger.error(e);
+  } catch (e: any) {
+    if (e.message.includes("ObjectId")) {
+      res.status(400).send({ message: "invalid document _id" });
+      logger.error(e);
+    } else {
+      res.status(500).send("Server encountered an internal error!");
+      logger.error(e);
+    }
   }
 };
 
@@ -126,9 +136,19 @@ const putTrailById: Handler = async (req, res) => {
       }
     ).exec();
     res.status(200).send(updatedTrail);
-  } catch (e) {
-    res.status(500).send("Server encountered an internal error!");
-    logger.error(e);
+  } catch (e: any) {
+    if (e.message.includes("ObjectId")) {
+      res.status(400).send({ message: "invalid document _id" });
+      logger.error(e);
+    } else if (e.message.includes("Cast")) {
+      res
+        .status(400)
+        .send({ message: "datatype does not match filed to be updated" });
+      logger.error(e);
+    } else {
+      res.status(500).send("Server encountered an internal error!");
+      logger.error(e);
+    }
   }
 };
 

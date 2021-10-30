@@ -17,7 +17,7 @@ const swaggerDoc = {
   },
   servers: [
     {
-      url: "http://localhost:3500",
+      url: "https://ps-project02-express.herokuapp.com/",
       description: "Production Server",
     },
   ],
@@ -618,7 +618,7 @@ const swaggerDoc = {
         },
       },
       put: {
-        summary: "edit an existing trail",
+        summary: "edit an existing trail, returns updated document",
         tags: ["Trails"],
         parameters: [
           {
