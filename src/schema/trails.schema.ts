@@ -214,15 +214,9 @@ export const putTrailByIdSchema = object({
     describeTrail: string().typeError("describeTrail must be a string"),
     images: array().of(string().url("image must be an array of valid url")),
     createdBy: object({
-      firstName: string()
-        .typeError("firstName must be a string")
-        .required("firstName is required"),
-      lastName: string()
-        .typeError("lastName must be a string")
-        .required("lastName is required"),
-      email: string()
-        .email("createdBy email id is not valid")
-        .required("createdBy email is required"),
+      firstName: string().typeError("firstName must be a string"),
+      lastName: string().typeError("lastName must be a string"),
+      email: string().email("createdBy email id is not valid"),
       aboutYou: string().typeError("aboutYou must be a string"),
     }),
     createdAt: string().matches(
