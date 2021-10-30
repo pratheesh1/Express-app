@@ -4,11 +4,11 @@ This is a simple RESTful API project built with Express.js. and MongoDB for `tra
 
 # Index
 
-1. Context
-2. Specs and Documentation
-3. Endpoints
-4. Technologies Used
-5. Acknoledgements
+1. [Context](#1-context)
+2. [Specs and Documentation](#2-specs-and-documentation)
+3. [Endpoints](#3-endpoints)
+4. [Technologies Used](#4-technologies-used)
+5. [Acknoledgements](#5-acknoledgements)
 
 # 1. Context
 
@@ -91,6 +91,6 @@ This API if fully documented upto OpenAPI 3.0. specifications.
 
   This API uses Yup, a schema validation library for Node.js. for validating request body, query and parameters headers.
 
-# 5. Acknoledgements
+# 5. Acknowledgements
 
 YouTube and stackoverflow community for countless free tutorials and help on RESTful API development, validation and documentation.
