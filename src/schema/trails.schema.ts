@@ -24,10 +24,12 @@ export const getTrailsSchema = object({
       Array.isArray(val)
         ? array()
             .of(
-              string().matches(
-                /^[0-9]+(,|%2[cC])([0-9]+)*$/,
-                "distance must be of the format 2,3"
-              )
+              string()
+                .matches(
+                  /^[0-9]+(,|%2[cC])([0-9]+)*$/,
+                  "distance must be of the format 2,3"
+                )
+                .nullable()
             )
             .nullable()
         : string()
