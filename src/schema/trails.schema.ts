@@ -3,7 +3,7 @@ import { object, string, number, lazy, array } from "yup";
 //validation schema for  getTrails
 export const getTrailsSchema = object({
   query: object({
-    q: string().typeError("q must be a string"),
+    q: string().typeError("q must be a string").nullable(),
     difficulty: lazy((val) =>
       Array.isArray(val)
         ? array().of(
