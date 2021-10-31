@@ -3,7 +3,7 @@ import { object, string, number, lazy, array } from "yup";
 //validation schema for  getTrails
 export const getTrailsSchema = object({
   query: object({
-    q: string().typeError("q must be a string").nullable(),
+    q: string().typeError("q must be a string").nullable().notRequired(),
     difficulty: array()
       .of(
         number()
@@ -13,26 +13,17 @@ export const getTrailsSchema = object({
       )
       .nullable()
       .notRequired(),
-    distance: lazy((val) =>
-      Array.isArray(val)
-        ? array()
-            .of(
-              string()
-                .matches(
-                  /^[0-9]+(,|%2[cC])([0-9]+)*$/,
-                  "distance must be of the format 2,3"
-                )
-                .nullable()
-            )
-            .nullable()
-        : string()
-            .matches(
-              /^[0-9]+(,|%2[cC])([0-9]+)*$/,
-              "distance must be of the format 2,3"
-            )
-            .notRequired()
-            .nullable()
-    ),
+    distance: array()
+      .of(
+        string()
+          .matches(
+            /^[0-9]+(,|%2[cC])([0-9]+)*$/,
+            "distance must be of the format 2,3"
+          )
+          .nullable()
+      )
+      .nullable()
+      .notRequired(),
   }),
 });
 
