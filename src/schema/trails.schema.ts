@@ -18,6 +18,7 @@ export const getTrailsSchema = object({
             .min(1, "difficulty cannot be less than 1")
             .max(4, "difficulty cannot be more than 4")
             .typeError("difficulty must be a number in range >=1 and <=4")
+            .notRequired()
             .nullable()
     ),
     distance: lazy((val) =>
@@ -37,6 +38,7 @@ export const getTrailsSchema = object({
               /^[0-9]+(,|%2[cC])([0-9]+)*$/,
               "distance must be of the format 2,3"
             )
+            .notRequired()
             .nullable()
     ),
   }),
