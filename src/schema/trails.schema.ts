@@ -150,22 +150,14 @@ export const putTrailByIdSchema = object({
       .typeError("description must be a string")
       .notRequired(),
     country: object({
-      id: number()
-        .required("country id is required")
-        .typeError("country id must be a number"),
-      name: string()
-        .required("country name is required")
-        .typeError("country name must be a string"),
+      id: number().typeError("country id must be a number"),
+      name: string().typeError("country name must be a string"),
       description: string().typeError("country description must be a string"),
     }).notRequired(),
     tags: array().of(
       object({
-        description: string()
-          .required("tag description is required")
-          .typeError("tag description must be a string"),
-        detail: string()
-          .required("tag detail is required")
-          .typeError("tag detail must be a string"),
+        description: string().typeError("tag description must be a string"),
+        detail: string().typeError("tag detail must be a string"),
         specialFlags: string().typeError("tag specialFlags must be a string"),
       }).notRequired()
     ),
