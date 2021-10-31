@@ -145,8 +145,10 @@ export const deleteTrailByIdSchema = object({
 export const putTrailByIdSchema = object({
   //schema to validate body
   body: object({
-    trailName: string().typeError("trailName must be a string"),
-    description: string().typeError("description must be a string"),
+    trailName: string().typeError("trailName must be a string").notRequired(),
+    description: string()
+      .typeError("description must be a string")
+      .notRequired(),
     country: object({
       id: number()
         .required("country id is required")
@@ -155,7 +157,7 @@ export const putTrailByIdSchema = object({
         .required("country name is required")
         .typeError("country name must be a string"),
       description: string().typeError("country description must be a string"),
-    }),
+    }).notRequired(),
     tags: array().of(
       object({
         description: string()
@@ -165,7 +167,7 @@ export const putTrailByIdSchema = object({
           .required("tag detail is required")
           .typeError("tag detail must be a string"),
         specialFlags: string().typeError("tag specialFlags must be a string"),
-      })
+      }).notRequired()
     ),
     reviews: array().of(
       object({
@@ -186,24 +188,27 @@ export const putTrailByIdSchema = object({
           /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/,
           "date-time invalid"
         ),
-      })
+      }).notRequired()
     ),
     accessibility: array().of(
-      string().typeError("accessibility must be a string")
+      string().typeError("accessibility must be a string").notRequired()
     ),
     difficulty: number()
       .min(1, "difficulty cannot be less than 1")
       .max(4, "difficulty cannot be more than 4")
-      .typeError("difficulty must be a number in range >=1 and <=4"),
-    distance: number().typeError("distance must be a number"),
-    timeToComplete: number().typeError("timeToComplete must be a number"),
+      .typeError("difficulty must be a number in range >=1 and <=4")
+      .notRequired(),
+    distance: number().typeError("distance must be a number").notRequired(),
+    timeToComplete: number()
+      .typeError("timeToComplete must be a number")
+      .notRequired(),
     resourcesInRoute: array().of(
       object({
         resourceName: string()
           .typeError("resourceName must be a string")
           .required("resourceName is required"),
         type: string().typeError("type must be a string"),
-      })
+      }).notRequired()
     ),
     describeTrail: string().typeError("describeTrail must be a string"),
     images: array().of(string().url("image must be an array of valid url")),
@@ -212,16 +217,20 @@ export const putTrailByIdSchema = object({
       lastName: string().typeError("lastName must be a string"),
       email: string().email("createdBy email id is not valid"),
       aboutYou: string().typeError("aboutYou must be a string"),
-    }),
-    createdAt: string().matches(
-      /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?(([+-]\d\d:\d\d)|Z)?$/i,
-      "createdAt is not valid ISO datetime"
-    ),
-    updatedAt: string().matches(
-      /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?(([+-]\d\d:\d\d)|Z)?$/i,
-      "createdAt is not valid ISO datetime"
-    ),
-    __v: number().typeError("__v must be a number"),
+    }).notRequired(),
+    createdAt: string()
+      .matches(
+        /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?(([+-]\d\d:\d\d)|Z)?$/i,
+        "createdAt is not valid ISO datetime"
+      )
+      .notRequired(),
+    updatedAt: string()
+      .matches(
+        /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?(([+-]\d\d:\d\d)|Z)?$/i,
+        "createdAt is not valid ISO datetime"
+      )
+      .notRequired(),
+    __v: number().typeError("__v must be a number").notRequired(),
   }),
 
   //schema to validate params
