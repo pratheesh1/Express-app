@@ -8,7 +8,7 @@ This is a simple RESTful API project built with Express.js. and MongoDB for `tra
 2. [Specs and Documentation](#2-specs-and-documentation)
 3. [Endpoints](#3-endpoints)
 4. [Technologies Used](#4-technologies-used)
-5. [Acknoledgements](#5-acknoledgements)
+5. [Acknowledgements](#5-acknowledgements)
 
 # 1. Context
 
