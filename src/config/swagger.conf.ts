@@ -397,7 +397,7 @@ const swaggerDoc = {
               type: "array",
               items: {
                 type: "string",
-                pattern: "^d*,d*$",
+                pattern: "[0-9]+,[0-9]+",
                 example: "2,8",
               },
             },
