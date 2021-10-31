@@ -4,31 +4,17 @@ import { object, string, number, lazy, array } from "yup";
 export const getTrailsSchema = object({
   query: object({
     q: string().typeError("q must be a string"),
-    difficulty: lazy((val) =>
-      Array.isArray(val)
-        ? array().of(
-            number()
-              .min(1, "difficulty cannot be less than 1")
-              .max(4, "difficulty cannot be more than 4")
-              .typeError("difficulty must be a number in range >=1 and <=4")
-          )
-        : number()
-            .min(1, "difficulty cannot be less than 1")
-            .max(4, "difficulty cannot be more than 4")
-            .typeError("difficulty must be a number in range >=1 and <=4")
+    difficulty: array().of(
+      number()
+        .min(1, "difficulty cannot be less than 1")
+        .max(4, "difficulty cannot be more than 4")
+        .typeError("difficulty must be a number in range >=1 and <=4")
     ),
-    distance: lazy((val) =>
-      Array.isArray(val)
-        ? array().of(
-            string().matches(
-              /^[0-9]+(,|%2[cC])([0-9]+)*$/,
-              "distance must be of the format 2,3"
-            )
-          )
-        : string().matches(
-            /^[0-9]+(,|%2[cC])([0-9]+)*$/,
-            "distance must be of the format 2,3"
-          )
+    distance: array().of(
+      string().matches(
+        /^[0-9]+(,|%2[cC])([0-9]+)*$/,
+        "distance must be of the format 2,3"
+      )
     ),
   }),
 });
