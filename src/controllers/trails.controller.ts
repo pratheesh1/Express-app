@@ -19,15 +19,13 @@ const getTrails: Handler = async (req, res) => {
       const search = terms.reduce(reducer);
       const regex = new RegExp("^.*" + search + ".*", "i");
       //query in trailName, description, describeTrail and country.name
-      query.push({ trailName: { $regex: regex, $options: "i" } });
-      query.push({ description: { $regex: regex, $options: "i" } });
-      query.push({ describeTrail: { $regex: regex, $options: "i" } });
-      query.push({ "country.name": { $regex: regex, $options: "i" } });
+      query.push({ trailName: regex });
+      query.push({ description: regex });
+      query.push({ describeTrail: regex });
+      query.push({ "country.name": regex });
     } else {
       query.push({});
     }
-
-    // { $regex: search.keyWord, $options: 'i' }}
 
     //search difficulty level
     const difficulty =
