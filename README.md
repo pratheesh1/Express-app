@@ -14,7 +14,7 @@ This is a simple RESTful API project built with Express.js. and MongoDB for `tra
 
 This is a custom API built for the [trails app](https://naughty-darwin-b8340c.netlify.app/) project. The project is a simple CRUD application for managing a list of trails. The application is built with [MongoDB](https://www.mongodb.com/) and [Express.js](https://expressjs.com/) and uses [Mongoose](https://mongoosejs.com/) as the ODM. There is also a static endpoint country designed to return a list of countries.
 
-The API project is structured as follows:
+The directories of this API project is structured as follows:
 
 ```
 ├── app.ts
